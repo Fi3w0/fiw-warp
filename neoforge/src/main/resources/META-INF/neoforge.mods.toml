@@ -1,7 +1,7 @@
 modLoader = "kotlinforforge"
 loaderVersion = "[6,)"
 license = "MIT"
-issueTrackerURL = "https://github.com/fiw/fiw-warp/issues"
+issueTrackerURL = "https://github.com/Fi3w0/fiw-warp/issues"
 
 [[mods]]
 modId = "fiwwarp"
