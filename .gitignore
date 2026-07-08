@@ -1,0 +1,36 @@
+# Gradle
+.gradle/
+build/
+*/build/
+out/
+
+# Loom / NeoForge run dirs
+run/
+*/run/
+.architectury-transformer/
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+*.code-workspace
+.eclipse/
+.settings/
+.classpath
+.project
+
+# OS
+.DS_Store
+
+# Local agent context, never published
+AGENTS.md
+AGENT.md
+CLAUDE.md
+
+# Kotlin compiler daemon
+.kotlin/
+
+# Claude Code local settings (per-user, not shared)
+.claude/settings.local.json
