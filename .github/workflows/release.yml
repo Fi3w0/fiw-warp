@@ -12,6 +12,8 @@ permissions:
 jobs:
   release:
     runs-on: ubuntu-latest
+    env:
+      MODRINTH_TOKEN_SET: ${{ secrets.MODRINTH_TOKEN != '' }}
     steps:
       - uses: actions/checkout@v7
 
@@ -57,7 +59,7 @@ jobs:
             neoforge/build/libs/*.jar
 
       - name: Publish to Modrinth (Fabric)
-        if: ${{ secrets.MODRINTH_TOKEN != '' }}
+        if: ${{ env.MODRINTH_TOKEN_SET == 'true' }}
         uses: Kir-Antipov/mc-publish@v3.3
         with:
           modrinth-id: fiw-warp
@@ -76,7 +78,7 @@ jobs:
             fabric-language-kotlin(required){modrinth:fabric-language-kotlin}
 
       - name: Publish to Modrinth (NeoForge)
-        if: ${{ secrets.MODRINTH_TOKEN != '' }}
+        if: ${{ env.MODRINTH_TOKEN_SET == 'true' }}
         uses: Kir-Antipov/mc-publish@v3.3
         with:
           modrinth-id: fiw-warp
