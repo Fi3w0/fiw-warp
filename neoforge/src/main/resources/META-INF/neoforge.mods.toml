@@ -1,0 +1,35 @@
+modLoader = "kotlinforforge"
+loaderVersion = "[6,)"
+license = "MIT"
+issueTrackerURL = "https://github.com/fiw/fiw-warp/issues"
+
+[[mods]]
+modId = "fiwwarp"
+version = "${version}"
+displayName = "Fiw Warp"
+displayTest = "IGNORE_ALL_VERSION"
+authors = "Fiw"
+logoFile = "fiwwarp_icon.png"
+description = '''
+Lightweight, server-side teleport mod: homes, warps, warmups and cooldowns.'''
+
+[[dependencies.fiwwarp]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.11,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.fiwwarp]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.11,1.22)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.fiwwarp]]
+modId = "kotlinforforge"
+type = "required"
+versionRange = "[6,)"
+ordering = "AFTER"
+side = "BOTH"
