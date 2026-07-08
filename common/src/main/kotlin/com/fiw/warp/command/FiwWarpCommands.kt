@@ -1,5 +1,6 @@
 package com.fiw.warp.command
 
+import com.fiw.warp.Constants
 import com.fiw.warp.FiwWarp
 import com.fiw.warp.data.WarpLocation
 import com.fiw.warp.teleport.BackManager
@@ -213,6 +214,10 @@ object FiwWarpCommands {
 
 		if (cfg.warpConfirmationEnabled) {
 			val key = name.lowercase()
+			val previous = WarpConfirmationManager.peek(player.uuid)
+			if (previous != null && !previous.isExpired()) {
+				player.sendSystemMessage(Component.literal(cfg.messages.warpConfirmSuperseded.fmt("name" to previous.warpName)))
+			}
 			WarpConfirmationManager.request(player.uuid, key, cfg.warpConfirmationSeconds)
 
 			val accept = Component.literal(cfg.messages.warpConfirmAcceptButton)
@@ -257,6 +262,10 @@ object FiwWarpCommands {
 		val pending = WarpConfirmationManager.consume(player.uuid)
 		if (pending == null) {
 			player.sendSystemMessage(Component.literal(msg.warpConfirmNone))
+			return 0
+		}
+		if (pending.isExpired()) {
+			player.sendSystemMessage(Component.literal(msg.warpConfirmExpired.fmt("name" to pending.warpName)))
 			return 0
 		}
 		player.sendSystemMessage(Component.literal(msg.warpConfirmDenied.fmt("name" to pending.warpName)))
@@ -347,6 +356,11 @@ object FiwWarpCommands {
 		val admin = isAdmin(ctx.source)
 		val existed = warps.has(name)
 
+		if (!existed && name.lowercase() in Constants.RESERVED_WARP_NAMES) {
+			player.sendSystemMessage(Component.literal(cfg.messages.warpReservedName))
+			return 0
+		}
+
 		if (existed) {
 			val owner = warps.owner(name)
 			if (!admin && owner != player.uuid) {
@@ -389,6 +403,10 @@ object FiwWarpCommands {
 		}
 		if (!isAdmin(ctx.source) && warps.owner(from) != ctx.source.player?.uuid) {
 			ctx.source.sendFailure(Component.literal(msg.warpNotOwner))
+			return 0
+		}
+		if (to.lowercase() in Constants.RESERVED_WARP_NAMES) {
+			ctx.source.sendFailure(Component.literal(msg.warpReservedName))
 			return 0
 		}
 		if (warps.has(to)) {

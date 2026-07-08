@@ -1,7 +1,7 @@
 # Changelog
 
-All notable changes to Fiw Warp are documented here. This file is intentionally kept out of
-version control (see `.gitignore`) and is meant for the release/distribution pipeline.
+All notable changes to Fiw Warp are documented here. This file is tracked in version control —
+the release pipeline extracts the matching version section as GitHub release notes on tag push.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project aims to follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
@@ -40,7 +40,9 @@ project aims to follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html
 ### Notes
 - `warps.json` from 1.0.0 loads and migrates automatically — existing warps keep working with
   no owner (admin-managed), same as before.
-- Don't name a warp `accept` or `deny`; those are reserved `/warp` subcommands.
+- Don't name a warp `accept` or `deny`; those are reserved `/warp` subcommands. `/setwarp` and
+  `/editwarp` now reject those names, and the server logs a warning on startup if a warp with
+  a reserved name already exists from before the upgrade.
 
 ## [1.0.0] - 2026-06-08
 

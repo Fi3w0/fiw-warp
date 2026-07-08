@@ -36,6 +36,14 @@ object FiwWarp {
 		homes = HomeStore(dataDir).also { it.load() }
 		warps = WarpStore(dataDir).also { it.load() }
 
+		val reserved = warps.names().filter { it in Constants.RESERVED_WARP_NAMES }
+		if (reserved.isNotEmpty()) {
+			logger.warn(
+				"Warp(s) named {} collide with reserved /warp subcommands and can't be reached via /warp <name>; rename them with /editwarp.",
+				reserved.joinToString(", "),
+			)
+		}
+
 		logger.info(
 			"{} ready (warmup={}s, homeCooldown={}s, warpCooldown={}s, maxHomes={})",
 			Constants.MOD_NAME, config.warmupSeconds, config.homeCooldownSeconds, config.warpCooldownSeconds, config.maxHomes,

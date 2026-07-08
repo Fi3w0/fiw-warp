@@ -16,6 +16,9 @@ object WarpConfirmationManager {
 		pending[player] = Pending(warpName, System.currentTimeMillis() + seconds * 1000L)
 	}
 
+	/** Looks at the pending request without consuming it. */
+	fun peek(player: UUID): Pending? = pending[player]
+
 	/** Removes and returns the pending request, if any. */
 	fun consume(player: UUID): Pending? = pending.remove(player)
 }

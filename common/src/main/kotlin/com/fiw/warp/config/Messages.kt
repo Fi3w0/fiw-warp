@@ -45,6 +45,7 @@ class Messages {
 	var warpRenameConflict: String = "§cA warp named §f{to}§c already exists."
 	var warpLimitReached: String = "§cYou reached the warp limit (§f{max}§c)."
 	var warpNotOwner: String = "§cYou can only manage warps you created."
+	var warpReservedName: String = "§cThat name is reserved and can't be used for a warp."
 
 	/** Sent before the accept/deny buttons; `{name}` and `{seconds}` are available. */
 	var warpConfirmPrompt: String = "§eTeleporting to warp §f{name}§e. Confirm within §f{seconds}s§e:"
@@ -53,6 +54,7 @@ class Messages {
 	var warpConfirmNone: String = "§cYou have no pending warp request."
 	var warpConfirmExpired: String = "§cYour warp request to §f{name}§c expired. Use §f/warp {name}§c again."
 	var warpConfirmDenied: String = "§7Warp request to §f{name}§7 cancelled."
+	var warpConfirmSuperseded: String = "§7Your pending request for warp §f{name}§7 was replaced."
 	var warpConfirmGone: String = "§cThat warp no longer exists."
 
 	// ---- Back -------------------------------------------------------------------
